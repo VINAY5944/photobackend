@@ -15,15 +15,15 @@ dotenv.config()
 const s3 = new S3Client({
     region: `${process.env.region}`,
     credentials: {
-      accessKeyId:process.env.accessKeyId,
-      secretAccessKey: process.env.secretAccessKey,
+      accessKeyId:`${process.env.accessKeyId}`,
+      secretAccessKey: `${process.env.secretAccessKey}`,
     },
 });
 
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: process.env.bucket,
+    bucket: `${process.env.bucket}`,
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
@@ -57,7 +57,7 @@ const uploadone= async (req, res) => {
   
       // Generate a pre-signed URL using AWS SDK v3
       const params = {
-        Bucket: process.env.bucket,
+        Bucket:`${process.env.bucket}`,
         Key: file.originalname,
         ContentType: file.mimetype,
       };
@@ -103,7 +103,7 @@ const uploadone= async (req, res) => {
   
       for (const doc of all) {
         const params = {
-          Bucket: process.env.bucket,
+          Bucket:`${process.env.bucket}`,
           Key: doc.file,
         };
   
@@ -129,10 +129,10 @@ const uploadone= async (req, res) => {
 
 
   const deleteFile = async (bucket, key) => {
-    const s3Client = new S3Client({ region: `${process.env.region}`,
+    const s3Client = new S3Client({ region:`${process.env.region}`,
         credentials: {
-            accessKeyId:process.env.accessKeyId,
-            secretAccessKey: process.env.secretAccessKey,
+            accessKeyId:`${process.env.accessKeyId}`,
+            secretAccessKey:`${process.env.secretAccessKey}`,
           }
 
 
@@ -169,7 +169,7 @@ const uploadone= async (req, res) => {
       }
   
       // Delete file from AWS S3
-      const bucketName = process.env.bucket; // Replace with your S3 bucket name
+      const bucketName =`${process.env.bucket}`; // Replace with your S3 bucket name
   
       // Call the deleteFile function
       await deleteFile(bucketName, file);
