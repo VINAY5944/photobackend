@@ -3,7 +3,7 @@ const dotenv=require('dotenv')
 dotenv.config()
 const connection=async()=>{
     try {
-        const connect= await mongoose.connect(process.env.mongooseconnectionstring)
+        const connect= await mongoose.connect(`${process.env.mongooseconnectionstring}`)
         if(connect){
            console.log('data base is active');
         }
