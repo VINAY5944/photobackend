@@ -13,7 +13,7 @@ const model = require('../schema');
 
 dotenv.config()
 const s3 = new S3Client({
-    region: process.env.region,
+    region: `${process.env.region}`,
     credentials: {
       accessKeyId:process.env.accessKeyId,
       secretAccessKey: process.env.secretAccessKey,
@@ -129,7 +129,7 @@ const uploadone= async (req, res) => {
 
 
   const deleteFile = async (bucket, key) => {
-    const s3Client = new S3Client({ region: process.env.region,
+    const s3Client = new S3Client({ region: `${process.env.region}`,
         credentials: {
             accessKeyId:process.env.accessKeyId,
             secretAccessKey: process.env.secretAccessKey,
